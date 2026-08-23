@@ -8,3 +8,6 @@ gh-auth-*.txt
 probe.txt
 run-gh-auth.cmd
 .DS_Store
+
+.vercel
+.env*

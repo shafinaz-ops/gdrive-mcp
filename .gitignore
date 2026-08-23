@@ -7,6 +7,8 @@ node_modules
 gh-auth-*.txt
 probe.txt
 run-gh-auth.cmd
+run-vercel-login.cmd
+vercel-login-*.txt
 .DS_Store
 
 .vercel

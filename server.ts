@@ -9,6 +9,7 @@ async function readJsonBody(req: IncomingMessage): Promise<unknown> {
   }
   if (chunks.length === 0) return undefined;
   const raw = Buffer.concat(chunks).toString("utf8");
+  console.log("DEBUG raw body:", JSON.stringify(raw));
   try {
     return JSON.parse(raw);
   } catch {

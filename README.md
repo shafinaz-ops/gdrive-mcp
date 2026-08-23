@@ -12,8 +12,8 @@ It provides two tools:
 
 ## Architecture
 
-- `api/index.ts` — Vercel serverless function (Streamable HTTP MCP endpoint).
-- `src/server.ts` — MCP server definition + tools.
+- `server.ts` — Node.js HTTP server entrypoint (Streamable HTTP MCP endpoint).
+- `src/mcp.ts` — MCP server definition + tools.
 - `src/drive.ts` — Google Drive client using a **service account**.
 
 Authentication is read-only (`drive.readonly`) via a Google **service account**.
@@ -66,7 +66,7 @@ Encode the service-account key to base64:
 4. Deploy. The MCP endpoint will be:
 
    ```
-   https://<your-project>.vercel.app/api/index
+   https://<your-project>.vercel.app
    ```
 
 ### Option B — Vercel CLI
@@ -104,7 +104,7 @@ Example `claude_desktop_config.json`:
   "mcpServers": {
     "gdrive": {
       "type": "http",
-      "url": "https://<your-project>.vercel.app/api/index"
+      "url": "https://<your-project>.vercel.app"
     }
   }
 }
@@ -116,7 +116,7 @@ For clients that use the generic MCP config format:
 {
   "mcpServers": {
     "gdrive": {
-      "url": "https://<your-project>.vercel.app/api/index"
+      "url": "https://<your-project>.vercel.app"
     }
   }
 }

@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { listFiles, readFile } from "./drive.js";
 
-export function createServer(): McpServer {
+export function createMcpServer(): McpServer {
   const server = new McpServer({
     name: "gdrive-mcp",
     version: "1.0.0",

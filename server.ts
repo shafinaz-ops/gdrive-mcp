@@ -1,21 +1,18 @@
-import type { IncomingMessage, ServerResponse } from "node:http";
+import { createServer } from "node:http";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { createServer } from "../src/mcp.js";
+import { createMcpServer } from "./src/mcp.js";
 
-type VercelLikeRequest = IncomingMessage & { body?: unknown };
-
-export default async function handler(req: VercelLikeRequest, res: ServerResponse) {
-  const server = createServer();
-
+const server = createServer(async (req, res) => {
+  const mcp = createMcpServer();
   const transport = new StreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,
   });
 
-  await server.connect(transport);
+  await mcp.connect(transport);
 
   try {
-    await transport.handleRequest(req, res, req.body);
+    await transport.handleRequest(req, res);
   } catch (err) {
     if (!res.headersSent) {
       res.statusCode = 500;
@@ -32,4 +29,9 @@ export default async function handler(req: VercelLikeRequest, res: ServerRespons
       );
     }
   }
-}
+});
+
+const port = Number(process.env.PORT ?? 3000);
+server.listen(port, () => {
+  console.log(`gdrive-mcp listening on port ${port}`);
+});

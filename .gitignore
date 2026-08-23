@@ -1,0 +1,10 @@
+node_modules
+.next
+.vercel
+.env
+.env.local
+*.log
+gh-auth-*.txt
+probe.txt
+run-gh-auth.cmd
+.DS_Store
